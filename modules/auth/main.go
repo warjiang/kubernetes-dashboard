@@ -15,6 +15,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"k8s.io/klog/v2"
@@ -39,6 +40,12 @@ func main() {
 		client.WithMasterUrl(args.ApiServerHost()),
 		client.WithInsecureTLSSkipVerify(args.ApiServerSkipTLSVerify()),
 	)
+	versionInfo, err := client.InClusterClient().Discovery().ServerVersion()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(versionInfo.String())
+	}
 
 	klog.V(1).InfoS("Listening and serving insecurely on", "address", args.Address())
 	if err := router.Router().Run(args.Address()); err != nil {

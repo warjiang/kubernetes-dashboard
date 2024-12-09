@@ -140,6 +140,7 @@ func buildConfigFromAuthInfo(authInfo *api.AuthInfo) (*rest.Config, error) {
 		CertificateAuthority:     baseConfig.TLSClientConfig.CAFile,
 		CertificateAuthorityData: baseConfig.TLSClientConfig.CAData,
 		InsecureSkipTLSVerify:    baseConfig.TLSClientConfig.Insecure,
+		ProxyURL:                 "socks5://AI-Insight:9sw_D%23!1@101.126.150.231:1080",
 	}
 
 	cmdCfg.AuthInfos[DefaultCmdConfigName] = authInfo

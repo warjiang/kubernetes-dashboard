@@ -1,24 +1,39 @@
 {
+  "/api/v1/login": {
+    "target": "http://127.0.0.1:8001",
+    "secure": false,
+    "ws": false,
+    "changeOrigin": true,
+    "debug": true
+  },
+  "/api/v1/me": {
+    "target": "http://127.0.0.1:8001",
+    "secure": false,
+    "ws": false,
+    "changeOrigin": true,
+    "debug": true
+  },
   "/api": {
-    "target": "http://gateway:8000",
+    "target": "http://127.0.0.1:8002",
     "secure": false,
     "ws": true,
-    "changeOrigin": true
+    "changeOrigin": true,
+    "debug": true
   },
   "/config": {
-    "target": "http://gateway:8000",
+    "target": "http://127.0.0.1:8000",
     "secure": false,
     "ws": true,
     "changeOrigin": true
   },
   "/systembanner": {
-    "target": "http://gateway:8000",
+    "target": "http://127.0.0.1:8000",
     "secure": false,
     "ws": true,
     "changeOrigin": true
   },
   "/settings": {
-    "target": "http://gateway:8000",
+    "target": "http://127.0.0.1:8000",
     "secure": false,
     "ws": true,
     "changeOrigin": true
