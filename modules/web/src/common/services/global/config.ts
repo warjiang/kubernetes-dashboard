@@ -19,7 +19,7 @@ import {Observable} from 'rxjs';
 
 @Injectable()
 export class ConfigService {
-  private readonly configPath_ = 'config';
+  private readonly configPath_ = '/member/member1/api/v1/config';
   private config_: AppConfig;
   private initTime_: number;
 

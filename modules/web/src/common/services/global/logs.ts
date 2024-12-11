@@ -28,7 +28,7 @@ export class LogService {
   constructor(private readonly http_: HttpClient) {}
 
   getResource<T>(uri: string, params?: HttpParams): Observable<T> {
-    return this.http_.get<T>(`api/v1/log/${uri}`, {params});
+    return this.http_.get<T>(`/member/member1/api/v1/proxy/log/${uri}`, {params});
   }
 
   setFollowing(status: boolean): void {

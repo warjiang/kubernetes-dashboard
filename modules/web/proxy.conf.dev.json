@@ -1,0 +1,16 @@
+{
+  "/member": {
+    "target": "http://127.0.0.1:9000",
+    "secure": false,
+    "ws": false,
+    "changeOrigin": true,
+    "debug": true
+  },
+  "/api": {
+    "target": "http://127.0.0.1:9000",
+    "secure": false,
+    "ws": false,
+    "changeOrigin": true,
+    "debug": true
+  }
+}

@@ -39,7 +39,7 @@ export class GlobalSettingsService {
   onSettingsUpdate = new ReplaySubject<void>();
   onPageVisibilityChange = new EventEmitter<boolean>();
 
-  private readonly endpoint_ = 'settings';
+  private readonly endpoint_ = 'member/member1/api/v1/settings';
   private settings_: GlobalSettings = DEFAULT_SETTINGS;
   private unsubscribe_ = new Subject<void>();
   private isInitialized_ = false;
