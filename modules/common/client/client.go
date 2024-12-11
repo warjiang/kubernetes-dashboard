@@ -17,6 +17,7 @@ package client
 import (
 	"context"
 	"fmt"
+	"k8s.io/client-go/tools/clientcmd"
 	"net/http"
 	"os"
 
@@ -40,9 +41,12 @@ func InClusterClient() client.Interface {
 	if inClusterClient != nil {
 		return inClusterClient
 	}
-
+	const karmadaApiServer = "https://172.18.0.2:5443"
+	const memberName = "member1"
+	_config, err := clientcmd.BuildConfigFromFlags("", "/Users/warjiang/.kube/karmada.config")
+	_config.Host = fmt.Sprintf("%s/apis/cluster.karmada.io/v1alpha1/clusters/%s/proxy/", karmadaApiServer, memberName)
 	// init on-demand only
-	c, err := client.NewForConfig(baseConfig)
+	c, err := client.NewForConfig(_config)
 	if err != nil {
 		klog.ErrorS(err, "Could not init kubernetes in-cluster client")
 		os.Exit(1)
@@ -58,16 +62,20 @@ func Client(request *http.Request) (client.Interface, error) {
 		return nil, fmt.Errorf("client package not initialized")
 	}
 
-	config, err := configFromRequest(request)
+	// config, err := configFromRequest(request)
+	const karmadaApiServer = "https://172.18.0.2:5443"
+	const memberName = "member1"
+	_config, err := clientcmd.BuildConfigFromFlags("", "/Users/warjiang/.kube/karmada.config")
+	_config.Host = fmt.Sprintf("%s/apis/cluster.karmada.io/v1alpha1/clusters/%s/proxy/", karmadaApiServer, memberName)
 	if err != nil {
 		return nil, err
 	}
 
 	if args.CacheEnabled() {
-		return cacheclient.New(config, GetBearerToken(request))
+		return cacheclient.New(_config, GetBearerToken(request))
 	}
 
-	return client.NewForConfig(config)
+	return client.NewForConfig(_config)
 }
 
 func APIExtensionsClient(request *http.Request) (apiextensionsclientset.Interface, error) {

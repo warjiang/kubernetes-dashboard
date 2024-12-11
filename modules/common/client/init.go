@@ -57,6 +57,8 @@ func (in *configBuilder) buildBaseConfig() (config *rest.Config, err error) {
 	if len(in.masterUrl) > 0 {
 		klog.InfoS("Using apiserver-host location", "masterUrl", in.masterUrl)
 	}
+	//_config, err := clientcmd.LoadFromFile("")
+	//s := _config.Clusters[_config.CurrentContext].ProxyURL
 
 	config, err = clientcmd.BuildConfigFromFlags(in.masterUrl, in.kubeconfigPath)
 	if err != nil {
@@ -134,13 +136,12 @@ func configFromRequest(request *http.Request) (*rest.Config, error) {
 
 func buildConfigFromAuthInfo(authInfo *api.AuthInfo) (*rest.Config, error) {
 	cmdCfg := api.NewConfig()
-
 	cmdCfg.Clusters[DefaultCmdConfigName] = &api.Cluster{
 		Server:                   baseConfig.Host,
 		CertificateAuthority:     baseConfig.TLSClientConfig.CAFile,
 		CertificateAuthorityData: baseConfig.TLSClientConfig.CAData,
 		InsecureSkipTLSVerify:    baseConfig.TLSClientConfig.Insecure,
-		ProxyURL:                 "socks5://AI-Insight:9sw_D%23!1@101.126.150.231:1080",
+		// ProxyURL:                 "socks5://AI-Insight:9sw_D%23!1@101.126.150.231:1080",
 	}
 
 	cmdCfg.AuthInfos[DefaultCmdConfigName] = authInfo
